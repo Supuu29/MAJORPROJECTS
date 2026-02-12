@@ -1,5 +1,4 @@
 <style>
-  
   .search-btn {
     background-color: #fe424d;
     color:#fff;
@@ -16,39 +15,59 @@
   }
   .search-input{
     border-radius: 25px;
-    padding: 0.5rem 3rem 0.5rem 3rem;
     font-size: 1rem;
   }
 </style>
-<nav class="navbar navbar-expand-md bd-body-light border-bottom sticky-top" >
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" >
+<nav class="navbar navbar-expand-md navbar-light bg-white border-bottom fixed-top shadow-sm py-2 px-3">
+<div class="container-fluid">
+<!-- MOBILE TOGGLE -->
+    <button class="navbar-toggler ms-auto" type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav ">
-         <a class="nav-link" href="/listings">Explore</a>
-      </div>
-      <div class="navbar-nav ms-auto">
-        <form class="d-flex" role="search">
-      <input class="form-control me-2 search-input" type="search" placeholder="Search destinations" />
-      <button class="btn search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+     <!-- LEFT -->
+  <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link fw-semibold" href="/listings"><i class="fa-solid fa-compass nav-icon "></i>Explore</a>
+        </li>
+  </ul>
+      <!-- CENTER SEARCH -->
+    <form class="d-flex mx-auto search-form" role="search" action="/search" method="GET">
+        <input class="form-control me-2 rounded-pill" type="search" placeholder="Search Title..." name="q">
+        <button class="btn btn-danger rounded-pill px-3">Search</button>
     </form>
-</div>
-<div class="navbar-nav ms-auto  ">
-         <a class="nav-link" href="/listings/new">Airbnb Your home</a>
-        <% if(currUser) { %>
-        <a class="nav-link" href="/logout"><b>Log out</b></a>
+      <!-- RIGHT -->
+    <ul class="navbar-nav ms-auto align-items-center gap-2">
+
+        <li class="nav-item">
+          <a class="nav-link" href="/listings/new">Airbnb your Home</a>
+        </li>
+
+        <% if(!currUser){ %>
+          <li class="nav-item">
+            <a class="nav-link" href="/signup">Sign up</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Log in</a>
+          </li>
         <% } else { %>
-        <a class="nav-link"  href="/signup"><b>Sign up</b></a>
-        <a class="nav-link" href="/login"><b>Log in</b></a>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">Log out</a>
+          </li>
         <% } %>
-        </div> 
-    </div>
- </div>
+
+    </ul>
+   </div>
+  </div>
 </nav>
+      
 
+        
+
+    
   
 
   
+

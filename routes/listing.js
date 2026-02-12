@@ -13,7 +13,6 @@ router.route("/")
 .get(wrapAsync(listingController.index))
 .post(
     isLoggedIn,
-    
     upload.single("listing[image]"),
     validateListing,
     wrapAsync(listingController.createListing)
@@ -21,30 +20,22 @@ router.route("/")
 
 //new route
 router.get("/new",isLoggedIn,listingController.renderNewform);
-
 router.route("/:id").get( wrapAsync(listingController.showListing))
 .put(isLoggedIn,isOwner,  upload.single("listing[image]"),
 validateListing,
-    wrapAsync(listingController.updateListings))
-    .delete( isLoggedIn,isOwner,wrapAsync(listingController.destroyListing));
+  wrapAsync(listingController.updateListings))
+  .delete( isLoggedIn,isOwner,wrapAsync(listingController.destroyListing));
 //Edit route
 router.get("/:id/edit",isLoggedIn, isOwner,  wrapAsync(listingController.renderEditForm));
-
-
-  router.get("/", async (req, res) => {
-
-  const category = req.query.category;
-
-  let listings;
-
-  if (category) {
+router.get("/", async (req, res) => {
+const category = req.query.category;
+let listings;
+if (category) {
     listings = await Listing.find({ category: category });
   } else {
     listings = await Listing.find({});
   }
 
   res.render("listings/index", { listings });
-
 });
-
 module.exports = router;

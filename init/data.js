@@ -158,7 +158,7 @@ geometry:{
   },
 
   {
-    title: "Safari Lodge in the Serengeti",
+    title: "Ski-In/Ski-Out Chalet",
     description:
       "Experience the thrill of the wild in a comfortable safari lodge. Witness the Great Migration up close.",
     image: {
@@ -395,22 +395,7 @@ geometry:{
     }
   },
 
-  {
-    title: "Historic Cottage in Charleston",
-    description:
-      "Experience the charm of historic Charleston in this beautifully restored cottage with a private garden.",
-    image: {
-      filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1587381420270-3e1a5b9e6904?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGxvZGdlfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
-    },
-    price: 1600,
-    location: "Charleston",
-    country: "United States",
-  geometry:{
-      type:"Point",
-      coordinates:[79,32]
-    }
-  },
+  
 
   {
     title: "Modern Apartment in Tokyo",

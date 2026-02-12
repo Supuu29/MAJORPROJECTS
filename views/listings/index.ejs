@@ -30,64 +30,93 @@
     border-radius: 999px;
     height: 2.5rem;
     padding: 20px ;
-    margin-left: 2rem;
+    margin-left: 38rem;
     display: inline-flex;
     font-size: 15px;
     align-items: center;
   }
 </style>
-   
-    <div id="filters">
-
-  <div class="filter">
-<div><i class="fa-solid fa-fire"></i></div>
-    <p>Trending</p>
-  </div>
-<div class="filter">
- <div><i class="fa-solid fa-bed"></i></div>
-  <p>Room</p>
+<!--  WISHLIST ONLY -->
+<div style="text-align:center; margin:20px 0;">
 </div>
-<div class="filter">
- <div><i class="fa-solid fa-mountain-city"></i></div>
-    <p>Mountains</p>
-  </div>
-<div class="filter">
-<div><i class="fa-brands fa-fort-awesome"></i></div>    
-<p>Castles</p>
-  </div>
- <div class="filter" >
-   <div></div> <i class="fa-solid fa-snowflake"></i>
-    <p>Arctic</p>
-  </div>
-  <div class="filter" >
-   <div></div> <i class="fa-solid fa-campground"></i>
-    <p>Camping</p>
-  </div>
-  <div class="filter" >
-   <div></div> <i class="fa-solid fa-person-swimming"></i>
-    <p>Amazing Pool</p>
-  </div>
-  <div class="filter" >
-   <div></div> <i class="fa-solid fa-cow"></i>
-    <p>Farms</p>
-  </div>
-  <div class="filter" >
-   <div></div> <i class="fa-solid fa-igloo"></i>
-    <p>Domes</p>
-  </div>
+<style>
+.wishlist-heart{
+  position:absolute;
+  top:8px;
+  right:8px;
+  background:white;
+  border:none;
+  border-radius:50%;
+  padding:6px 10px;
+  font-size:18px;
+  cursor:pointer;
+}
+</style>
+<script>
+function getWishlist(){
+  return JSON.parse(localStorage.getItem("wishlist")) || [];
+}
+function saveWishlist(list){
+  localStorage.setItem("wishlist", JSON.stringify(list));
+}
+document.addEventListener("DOMContentLoaded", () => {
+  const cards = document.querySelectorAll(".card");
+  cards.forEach((card,index)=>{
+  const id = card.getAttribute("data-id") || index;
+  card.setAttribute("data-id", id);
+  card.style.position="relative";
+  const btn = document.createElement("button");
+  btn.innerHTML="🤍";
+  btn.className="wishlist-heart";
+  btn.onclick = ()=>toggle(id,btn);
+      if(getWishlist().includes(id)){
+      btn.innerHTML="❤️";
+    }
+    card.appendChild(btn);
+  });
+});
+function toggle(id,btn){
+  let list=getWishlist();
 
+  if(list.includes(id)){
+    list=list.filter(x=>x!=id);
+    btn.innerHTML="🤍";
+  }else{
+    list.push(id);
+    btn.innerHTML="❤️";
+  }
+ saveWishlist(list);
+}
+function showWishlist(){
+  const list=getWishlist();
+
+  document.querySelectorAll(".card").forEach(card=>{
+    const id=card.getAttribute("data-id");
+
+    card.style.display = list.includes(id) ? "block" : "none";
+  });
+}
+</script>
+  <select id="priceFilter" class="price-select">
+      <option value="all">All Prices</option>
+      <option value="0-2000">₹0 – ₹2000</option>
+      <option value="2000-5000">₹2000 – ₹5000</option>
+      <option value="5000-10000">₹5000 – ₹10000</option>
+      <option value="10000+">₹10000+</option>
+  </select>
 <div class="tax-toggle">
   <div class="form-check-reverse form-switch">
   <input class="form-check-input" type="checkbox" role="switch" id="flexswitchCheckDefault">
   <label class="form-check-label" for="flexswitchCheckDefault">Display total after taxes </label>
+     </div>
+   </div>
+  </div>
 </div>
- </div>
-
-    </div>
     <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1 mt-3" >
-       <% for(let listing of allListings) { %> 
+     <% for(let listing of allListings) { %> 
          <a href="/listings/<%= listing._id %>" class="listing-link">
-    <div class="card col listing-card">
+    <!-- <div class="card col listing-card"> -->
+      <div class="card col listing-card " data-price="<%= listing.price %>">
   <img src="<%= listing.image.url %>" 
   class="card-img-top" 
   alt="listing_image "
@@ -103,7 +132,7 @@
 </div>
 </a>
 <% } %>
-    </div>
+  </div>  
     <script>
       let taxSwitch= document.getElementById("flexswitchCheckDefault");
       taxSwitch.addEventListener("click",()=>{
@@ -116,10 +145,32 @@
           }
          
         }
-      })
-
-
-    </script>
+      });
+let taxInfo = document.getElementsByClassName("tax-info");
+for(info of taxInfo){
+   if(info.style.display != "inline"){
+      info.style.display="inline";
+   } else{
+      info.style.display="none";
+   }
+}
+//  PRICE FILTER (ADD THIS BELOW TAX CODE) 
+const filter = document.getElementById("priceFilter");
+const cards = document.querySelectorAll(".listing-card");
+filter.addEventListener("change", () => {
+const value = filter.value;
+cards.forEach(card => {
+const price = Number(card.dataset.price);
+    let show = true;
+    if(value === "0-2000") show = price <= 2000;
+    else if(value === "2000-5000") show = price > 2000 && price <= 5000;
+    else if(value === "5000-10000") show = price > 5000 && price <= 10000;
+    else if(value === "10000+") show = price > 10000;
+   card.style.display = show ? "block" : "none";
+ });
+});
+</script>
+</script>
     
 
 
