@@ -36,7 +36,10 @@ sendAI.addEventListener("click", async () => {
     console.log("API Response:", data);
 
     aiMessages.innerHTML += `<p><b>AI:</b> ${data.reply}</p>`;
+
     // aiMessages.innerHTML += `<p><b>AI:</b> ${JSON.stringify(data)}</p>`;
+         aiMessages.innerHTML += `<p><b>AI:</b> ${data.reply || "I'm currently busy.Please try again few seconds later."}</p>`;
+
 
     aiMessages.scrollTop = aiMessages.scrollHeight;
 });
