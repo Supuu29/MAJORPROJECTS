@@ -1,0 +1,76 @@
+#aiBtn{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    width:60px;
+    height:60px;
+    border:none;
+    border-radius:50%;
+    /* background:#ff385c; */
+    background:#111827;
+    color: #fff;;
+    font-size:24px;
+    cursor:pointer;
+    z-index:9999;
+}
+
+#aiBox{
+    position:fixed;
+    bottom:90px;
+    right:20px;
+    width:340px;
+    height:460px;
+    /* background:white; */
+        background:#F8FAFC;
+
+    border-radius:12px;
+    box-shadow:0 0 15px rgba(0,0,0,.25);
+    display:none;
+    overflow:hidden;
+    z-index:9999;
+}
+
+#aiHeader{
+    /* background:#ff385c; */
+    background:rgb(66, 65, 65);
+    color:white;
+    padding:12px;
+    font-weight:bold;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+#closeAI{
+    cursor:pointer;
+}
+
+#aiMessages{
+    height:300px;
+    overflow-y:auto;
+    padding:10px;
+}
+
+#aiInput{
+    width:95%;
+    margin:10px;
+    padding:10px;
+}
+
+#sendAI{
+    margin:10px;
+    width:95%;
+    padding:10px;
+    border:none;
+    /* background:#ff385c; */
+      background:#0c111e;
+    color:white;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+#typing {
+    font-style: italic;
+    color: gray;
+    margin: 8px 0;
+}
